@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="textbox">
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>EPassword:</b>
+  <%= @user.password_hash %>
+</p>
+<%= image_tag @user.avatar.url %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %> |
+<%= link_to 'Home', root_path %>
+
+</div>
+
+<h1> Upload a picture </h1>
+<%= form_for(@asset, :html => {:multipart => true}) do |f| %>
+ <div class="field">
+    <%= f.label :Pictueeee_upload %><br />
+    <%= f.file_field :asset %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+<div class="panel">
+<div class="textbox bottom-margin">
+	<h2> All pictures</h2>
+</div>
+
+</div>
+
+
+ 
+<center>
+<noformat>
+<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
+<tbody><tr>
+<% @user.assets.each do |u| %>
+
+ <!--  <%= @counter=@counter+1 %> -->
+
+
+
+<th> <div align="center" class="image" style="width: 222px;">
+<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
+<br>
+<span class="caption"><%= u.asset.updated_at %></span></div> </th>
+<% if @counter % 3 ==0 %>
+<tr></tr>
+<% end %>
+
+<% end %>

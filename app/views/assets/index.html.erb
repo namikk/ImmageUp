@@ -1,0 +1,29 @@
+<h1>Listing assetasdasds</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @assets.each do |asset| %>
+  <tr><td>
+  <div class="bottom-margin">
+	<div class="imageContainer">
+	<%= image_tag asset.asset.url %>  
+	</div>
+</div>  
+	</td>
+    <td><%= link_to 'Show', asset %></td>
+    <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
+    <td><%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Asset', new_asset_path %>

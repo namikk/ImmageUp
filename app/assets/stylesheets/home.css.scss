@@ -1,0 +1,56 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.image{
+height:150px;
+width:200px;
+background:#444444;
+color:#FFFFFF;
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+padding:5px;
+padding-left:5px;
+border-radius:5px;
+transition:all 0.3s linear 0s;overflow: hidden}
+
+div.image:hover, div.image-left:hover, div.image-right:hover {
+box-shadow:0 0 4px 4px #000000;
+color:#EDDA74 !important;
+text-shadow:0 1px 1px #000000;}
+
+div.image-left{
+background:#444444;
+color:#FFFFFF;
+clear:left;
+float:left;
+text-align:center;
+padding:5px;
+border-radius:5px;
+transition:all 0.3s linear 0s;margin-right:1em !important;margin-bottom:0.5em !important;}
+
+div.image-right{
+background:#444444;
+color:#FFFFFF;
+clear:right;
+float:right;
+text-align:center;
+padding:5px;
+border-radius:5px;
+transition:all 0.3s linear 0s;margin-left:1em !important;margin-bottom:0.5em !important;}
+
+div.image a{  text-decoration:  none;
+  font-weight:      bold;
+  background-color: #444444;
+  color:            #444444;}
+
+div.image a:hover{text-decoration:underline;  text-decoration:  none;
+  font-weight:      bold;
+  background-color: #444444;
+  color:            #444444;}
+
+.style_image {
+height:150px;
+max-width:222px;
+}

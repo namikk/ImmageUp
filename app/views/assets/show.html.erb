@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+<div class="bottom-margin">
+	<div class="imageContainer">
+	<%= image_tag @asset.asset.url %>
+	</div>
+</div>  
+
+<%= link_to 'Edit', edit_asset_path(@asset) %> |
+<%= link_to 'Back', assets_path %>

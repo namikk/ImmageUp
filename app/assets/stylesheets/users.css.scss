@@ -1,0 +1,67 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.imageContainer{
+	
+	background-color:#2b2b2b;
+	padding:11px;
+	border-radius:10px;
+	position:relative;
+	max-height:141px;
+
+img{
+	max-height:inherit;
+}
+float:left;
+}
+.floater{
+	
+float:left;
+
+
+}
+.panel {
+	background-color:#2b2b2b;
+	padding:25px;
+	border-radius:10px;
+	position:relative
+}
+.textbox {
+	background-color:  #C67171;
+	border-radius:4px;
+	padding:10px
+}
+.bottom-margin {
+	margin-bottom:5px
+}
+h2,h3,h4{
+	font-size:150%;
+	margin:0;
+	padding:0;
+	letter-spacing:1px;
+}
+h3 {
+	font-size:100%;
+	color:black;
+}
+h4 {
+	font-size:75%;
+}
+.input {
+    border: 1px solid #006;
+    background: #ffc;
+}.input:hover {
+    border: 1px solid #f00;
+    background: #ff6;
+}
+.button {
+	width:111;
+	height:44;
+	border-radius:4px;
+    border: 1px solid #006;
+    background: #eef;
+}.button:hover {
+    border: 1px solid #f00;
+    background: #C67171;
+}

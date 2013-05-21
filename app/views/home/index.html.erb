@@ -1,0 +1,84 @@
+
+<body>
+
+
+
+
+<% if current_user %>
+
+<center>
+<noformat>
+<table  bordercolor="993300" cellspacing="2" cellpadding="2">
+<tbody><tr>
+<% @assets.each do |u| %>
+
+ <!--  <%= @counter=@counter+1 %> -->
+
+
+
+<th> <div align="center" class="image" style="width: 222px; height:170px;">
+<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
+<br>
+<span class="caption"><%= u.asset.updated_at %></span></div> </th>
+<% if @counter % 3 ==0 %>
+<tr></tr>
+<% end %>
+<% end %>
+
+
+
+	<div align="center"><h11> Upload a picture </h11></div>
+
+<%= form_for(@asset, :html => {:multipart => true}) do |f| %>
+ <div class="field"><center>
+<div class="file_button_container"><input type="file" id="asset_asset" name="asset[asset]" class="file_button" />
+</div></center>
+  </div>
+  <div class="actions"><center>
+   <input name="commit" type="submit" value=" Upload " class="uploadSubmitButton"></center>
+  </div>
+<% end %>
+
+
+<% else %>
+
+
+<center>
+<noformat>
+<table  bordercolor="993300" cellspacing="3" cellpadding="2">
+<tbody><tr>
+<% @assets.each do |u| %>
+
+ <!--  <%= @counter=@counter+1 %> -->
+
+
+
+<th> <div align="center" class="image" style="width: 222px;">
+<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
+<br>
+<span class="caption"><%= u.asset.updated_at %></span></div> </th>
+<% if @counter % 3 ==0 %>
+<tr></tr>
+<% end %>
+
+<% end %>
+<!--
+<th> <div align="center" class="image" style="width: 206px;"><img alt="Gem Lake Reflections, #2." height="150" width="200" src="http://localhost:3000/system/assets/assets/000/000/001/original/191114.jpg?1368748840"><br><span class="caption">Gem Lake Reflections, #2.</span></div> </th>
+<th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-3/237980"><img alt="Gem Lake Reflections, #3." height="150" width="200" src="/images/small/237980.jpg"></a><br><span class="caption">Gem Lake Reflections, #3.</span></div> </th> </tr>
+<tr><th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-4/237981"><img alt="Gem Lake Reflections, #4." height="150" width="200" src="/images/small/237981.jpg"></a><br><span class="caption">Gem Lake Reflections, #4.</span></div> </th>
+<th> <div align="center" class="image" style="width: 206px;"><a href="/vernon-at-gem-lake/236764"><img alt="Vernon at Gem Lake" height="150" width="200" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTTb8sHn-M7l3gera0g3n5wQQHD7QujLfuMMxW1jYCW0rzqNUS"></a><br><span class="caption">Vernon being reflective.</span></div> </th>
+<th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-5/237983"><img alt="Gem Lake Reflections, #5." height="150" width="200" src="/images/small/237983.jpg"></a><br><span class="caption">Gem Lake Reflections, #5.</span></div> </th> -->
+</tr>
+</tbody></table></noformat>
+</center>
+
+
+<% end %> <!-- if else end -->
+
+
+
+
+<br>
+
+ 
+</html>
