@@ -6,9 +6,13 @@ class ApplicationController < ActionController::Base
   def activeAlbum
     if current_user.albums.any?
       current_user.albums.each do |a|
-      @activeAlbum = a.first
+        
+      return @activeAlbum = a
+      
       end
     end
+
+    
   end
   def current_user
     # Note: we want to use "find_by_id" because it's OK to return a nil.
