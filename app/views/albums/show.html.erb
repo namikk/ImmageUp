@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Album Name</b>
+  <%= @album.albumName %>
+</p>
+
+<p>
+  <b>Description</b>
+  <%= @album.description %>
+</p>
+
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', current_user %>
+
+
+
+
+
+ 
+<center>
+<noformat>
+<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
+<tbody><tr>
+<% if @album.assets.any? %>
+<% @album.assets.each do |u| %>
+
+<% @counter=@counter+1 %>
+
+<th> <div align="center" class="image" style="width: 222px;">
+<%= link_to image_tag(u.asset.url, :class => "style_image"),u %>
+<br>
+<span class="caption"><%= u.asset.original_filename %></span></div> </th>
+<% if @counter % 3 ==0 %>
+<tr></tr>
+<% end %>
+<% end %>
+
+<% end %>					</tr>
+				</tbody>
+			</table>
+		</noformat>
+	</center>
