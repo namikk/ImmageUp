@@ -1,5 +1,19 @@
 Immageup::Application.routes.draw do
+  resources :albums
+
+
 post "sign_in" => "authentication#login"
+  
+  
+get "sign_in" => "authentication#sign_in"
+get "signed_out" => "authentication#signed_out"
+get "change_password" => "authentication#change_password"
+get "forgot_password" => "authentication#forgot_password"
+get "new_user" => "users#new"
+get "password_sent" => "authentication#password_sent"
+
+get "adminpanel" => "users#adminpanel"
+
   get "authentication/change_password"
 
   get "authentication/forgot_password"
@@ -11,12 +25,6 @@ post "sign_in" => "authentication#login"
   get "authentication/sign_in"
 
   get "authentication/signed_out"
-get "sign_in" => "authentication#sign_in"
-get "signed_out" => "authentication#signed_out"
-get "change_password" => "authentication#change_password"
-get "forgot_password" => "authentication#forgot_password"
-get "new_user" => "authentication#new_user"
-get "password_sent" => "authentication#password_sent"
   resources :users
 
   resources :assets

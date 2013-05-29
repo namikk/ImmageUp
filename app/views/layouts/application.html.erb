@@ -18,13 +18,23 @@
 <div class="menuBar">
 
 <div id="topbar">
+
+
+
     <div id="header-logo"> 
 <%= link_to image_tag("logoIcon.png", :height => "100%"),root_path%></div>
 	
     <% if current_user %>
 
+
     <div id="signout">
 <%= link_to image_tag("signout.png", :height => "100%" ), signed_out_path %> </div>
+    <% if current_user.isadmin %>
+
+    <div id="signout"> 
+<%= link_to image_tag("admin.png", :height => "100%"), "/adminpanel"%></div>
+<% end %>
+
 
     <div id="username">
 	<h11>
@@ -38,7 +48,7 @@
        <div id="signin">
 <%= link_to image_tag("signin.png", :height => "100%" ),"/sign_in" %> </div>
        <div id="register">
-<%= link_to image_tag("register.png",:height => "100%"),"/users/new"%> </div>
+<%= link_to image_tag("register.png",:height => "100%"),"/new_user"%> </div>
   <% end %>
 
 </div>

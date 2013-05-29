@@ -15,23 +15,24 @@ class AuthenticationController < ApplicationController
     @user = User.new
   end
 
-
+  
+  
 # method handles the HTTP "post" command, determining whether the user is authenticated.
-  def login
+def login
     name = params[:user][:name]
     password = params[:user][:password]
-    user = User.authenticate_by_name(name, password)
+    user = User.authenticate_by_name(name, password) || User.authenticate_by_email(name, password)
 
-if user
-  session[:user_id] = user.id
-  flash[:notice] = 'Welcome.'
-  redirect_to :root
-else
-  flash.now[:error] = 'Unknown user. Please check your username and password.'
-  render :action => "sign_in"
+	if user
+	session[:user_id] = user.id
+	flash[:notice] = 'Welcome.'
+	redirect_to :root
+	else
+	flash.now[:error] = 'Unknown user. Please check your username and password.'
+	render :action => "sign_in"
+	end
+
 end
-
-   end
 def signed_out
   session[:user_id] = nil
   flash[:notice] = "You have been signed out."

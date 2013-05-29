@@ -12,15 +12,15 @@ class AssetsController < ApplicationController
   end
 
   # GET /assets/1
-  # GET /assets/1.json
-  def show
-    @asset = Asset.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @asset }
+ # GET /assets/1.json
+    def show
+      @asset = Asset.find(params[:id])
+      @user = User.find(@asset.user_id)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @asset }
+      end
     end
-  end
 
   # GET /assets/new
   # GET /assets/new.json
@@ -43,8 +43,8 @@ class AssetsController < ApplicationController
   def create
 	if current_user
     @asset = current_user.assets.build(params[:asset])
-	else
-    @asset = Asset.new(params[:asset])
+    
+    @asset.album=activeAlbum
 	end
     respond_to do |format|
       if @asset.save

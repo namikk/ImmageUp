@@ -1,11 +1,14 @@
 class User < ActiveRecord::Base
 
 require 'bcrypt'
-  attr_accessible :email, :name, :password_confirmation , :avatar, :assets, :password, :user_id
+  attr_accessible :email, :name, :password_confirmation , :avatar, :assets, :password, :user_id, :isadmin, :albums
   attr_accessor :password
   before_save :encrypt_password
 
-  has_many :assets, :dependent => :destroy
+  has_many :assets, dependent: :destroy
+  has_many :albums, dependent: :destroy
+  
+ 
   
   has_attached_file :avatar,:dependent => :destroy, :default_url => '/defaultProfile.png'
 
@@ -34,13 +37,12 @@ def self.authenticate_by_name(name, password)
   end
 end
 
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+def encrypt_password
+	if password.present?
+		self.password_salt = BCrypt::Engine.generate_salt
+		self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
-  end
-
+end
 
 
   

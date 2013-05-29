@@ -1,84 +1,128 @@
-
 <body>
 
+<script>
+  function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
 
 
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
 
-<% if current_user %>
-
-<center>
-<noformat>
-<table  bordercolor="993300" cellspacing="2" cellpadding="2">
-<tbody><tr>
-<% @assets.each do |u| %>
-
- <!--  <%= @counter=@counter+1 %> -->
-
-
-
-<th> <div align="center" class="image" style="width: 222px; height:170px;">
-<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
-<br>
-<span class="caption"><%= u.asset.updated_at %></span></div> </th>
-<% if @counter % 3 ==0 %>
-<tr></tr>
-<% end %>
-<% end %>
+  // Setup the dnd listeners.
+  var dropZone = document.getElementById('asset_asset');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+</script> 
 
 
+	<% if @current_user %>
 
-	<div align="center"><h11> Upload a picture </h11></div>
+</script>
 
-<%= form_for(@asset, :html => {:multipart => true}) do |f| %>
+	<div align="center">
+		<h1> Upload a picture </h1>
+	</div>
+	<br>
+<form accept-charset="UTF-8" action="/assets" class="new_asset" enctype="multipart/form-data" id="new_asset" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="fe4H8jtK6MoFAYYZqrr5yRzR1NOL2o9D3atVRHw99RA="></div>
  <div class="field"><center>
-<div class="file_button_container"><input type="file" id="asset_asset" name="asset[asset]" class="file_button" />
+<div id="uploadContainer" class="file_button_container"><input type="file" id="asset_asset" name="asset[asset]" class="file_button">
 </div></center>
   </div>
   <div class="actions"><center>
    <input name="commit" type="submit" value=" Upload " class="uploadSubmitButton"></center>
   </div>
-<% end %>
+</form>
+<script type="text/javascript">    
+	var file= document.getElementById('asset_asset');
+    file.onchange= function() {
+    	
+	var container = document.getElementById('uploadContainer');
+        if (this.value){
+	container.style.opacity='100';
+        }
+        else 
+	container.style.opacity='0.5';
+    };
+</script>
 
+	<center>
+		<noformat>
+			<table  bordercolor="993300" cellspacing="2" cellpadding="2">
+				<tbody>
+					<tr>
+						
+						<% @current_user.assets.each do |u| %>
 
-<% else %>
+						<% @counter=@counter+1 %>
 
+						<th>
+						<div align="center" class="image" style="width: 222px; height:170px;">
+							<%= link_to image_tag(u.asset.url, :class => "style_image"), u %>
+							<br>
+							<span class="caption"><%= u.asset_file_name %></span>
+						</div></th>
+						<% if @counter % 3 ==0 %>
+					<tr></tr>
+					<% end %>
+					<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</noformat>
+	</center>
 
-<center>
-<noformat>
-<table  bordercolor="993300" cellspacing="3" cellpadding="2">
-<tbody><tr>
-<% @assets.each do |u| %>
+	<% else %>
+	
+	<!-- if not signed in -->
+	<center>
+	<div class="welcome">
+		
+	<h1>Welcome to Immageup</h1>
+	<br />
+	<h2>
+		This is the home page of Immageup. The website is supposed to offer easy uploading and sharing of pictures and gifs.
+		To start uploading, you must first register. Otherwise, you can scroll down to check some of the pictures uploaded by other users.
+	</h2>
 
- <!--  <%= @counter=@counter+1 %> -->
-
-
-
-<th> <div align="center" class="image" style="width: 222px;">
-<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
-<br>
-<span class="caption"><%= u.asset.updated_at %></span></div> </th>
-<% if @counter % 3 ==0 %>
-<tr></tr>
-<% end %>
-
-<% end %>
-<!--
-<th> <div align="center" class="image" style="width: 206px;"><img alt="Gem Lake Reflections, #2." height="150" width="200" src="http://localhost:3000/system/assets/assets/000/000/001/original/191114.jpg?1368748840"><br><span class="caption">Gem Lake Reflections, #2.</span></div> </th>
-<th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-3/237980"><img alt="Gem Lake Reflections, #3." height="150" width="200" src="/images/small/237980.jpg"></a><br><span class="caption">Gem Lake Reflections, #3.</span></div> </th> </tr>
-<tr><th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-4/237981"><img alt="Gem Lake Reflections, #4." height="150" width="200" src="/images/small/237981.jpg"></a><br><span class="caption">Gem Lake Reflections, #4.</span></div> </th>
-<th> <div align="center" class="image" style="width: 206px;"><a href="/vernon-at-gem-lake/236764"><img alt="Vernon at Gem Lake" height="150" width="200" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTTb8sHn-M7l3gera0g3n5wQQHD7QujLfuMMxW1jYCW0rzqNUS"></a><br><span class="caption">Vernon being reflective.</span></div> </th>
-<th> <div align="center" class="image" style="width: 206px;"><a href="/gem-lake-reflections-5/237983"><img alt="Gem Lake Reflections, #5." height="150" width="200" src="/images/small/237983.jpg"></a><br><span class="caption">Gem Lake Reflections, #5.</span></div> </th> -->
-</tr>
-</tbody></table></noformat>
+</div>
 </center>
+	
+	
+	<% if @assets.any? %>
+	<center>
+		<noformat>
+			<table  bordercolor="993300" cellspacing="3" cellpadding="2">
+				<tbody>
+					<tr>
+						<% @assets.each do |u| %>
 
+						<% @counter=@counter+1 %>
+						<th>
+						<div align="center" class="image" style="width: 222px;">
+							<%= link_to image_tag(u.asset.url, :class => "style_image"), u %>
+							<br>
+							<span class="caption"><%= u.asset.original_filename %></span>
+						</div></th>
+						<% if @counter % 4 ==0 %>
+					<tr></tr>
+					<% end %>
 
-<% end %> <!-- if else end -->
+					<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</noformat>
+	</center>
+	<% end %>
 
+	<% end %> <!-- if else end -->
 
+	<br>
 
-
-<br>
-
- 
-</html>
+	</html>

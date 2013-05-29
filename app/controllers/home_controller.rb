@@ -1,13 +1,17 @@
 class HomeController < ApplicationController
     def index
-    @users = User.all
-	@assets = Asset.all
 	@counter = 0
+	@assets = Asset.all
+  
+  if @current_user
+  @asset= current_user.assets.build
+    end
 	if current_user
-	@user= current_user
-    @asset = @user.assets.build(params[:asset])
-	end
-	
+
+  @asset= current_user.assets.build
+  @assets = current_user.assets
+  end
+  
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
