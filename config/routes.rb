@@ -1,38 +1,17 @@
 Immageup::Application.routes.draw do
   resources :albums
+  resources :users
+  resources :assets
+  match ':controller(/:action(/:id))(.:format)' 
+  root :to => 'home#index'
 
 
+get "new_user" => "users#new"
 post "sign_in" => "authentication#login"
-  
-  
 get "sign_in" => "authentication#sign_in"
 get "signed_out" => "authentication#signed_out"
-get "change_password" => "authentication#change_password"
-get "forgot_password" => "authentication#forgot_password"
-get "new_user" => "users#new"
-get "password_sent" => "authentication#password_sent"
-
 get "adminpanel" => "users#adminpanel"
 
-  get "authentication/change_password"
-
-  get "authentication/forgot_password"
-
-  get "authentication/new_user"
-
-  get "authentication/password_sent"
-
-  get "authentication/sign_in"
-
-  get "authentication/signed_out"
-  resources :users
-
-  resources :assets
-  #resources :sessions, only: [:new, :create, :destroy]
-  
- 
-	match ':controller(/:action(/:id))(.:format)' 
-  root :to => 'home#index'
   #match '/sessions/signin', to: 'sessions#new'
   #match '/sessions/signout', to: 'sessions#destroy', via: :delete
 

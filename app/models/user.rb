@@ -10,6 +10,12 @@ require 'bcrypt'
   
  
   
+  EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i
+  validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
+  validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :password, :confirmation => true #password_confirmation attr
+  validates_length_of :password, :in => 4..20, :on => :create
+  
   has_attached_file :avatar,:dependent => :destroy, :default_url => '/defaultProfile.png'
 
   validates_confirmation_of :password
@@ -44,31 +50,5 @@ def encrypt_password
     end
 end
 
-
-  
-	#EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i
-	#validates :name, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-	#validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
-	#validates :password, :confirmation => true #password_confirmation attr
-	#validates_length_of :password, :in => 6..20, :on => :create
-
-			
-# after_save :clear_password
-# def encrypt_password
-  # if password.present?
-    # self.salt = BCrypt::Engine.generate_salt
-    # self.encrypted_password= BCrypt::Engine.hash_secret(password, salt)
-  # end
-# end
-# def clear_password
-  # self.password = nil
-# end
-	 # def self.authenticate(email, password)
-    # find_by_email(email).try(:authenticate, password)
-  # end
-
-# def match_password(login_password="")
-	# encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
-# end
 
 end

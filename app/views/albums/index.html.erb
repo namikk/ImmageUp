@@ -1,6 +1,6 @@
 <h1>Listing albums</h1>
 
-<table>
+<table cellspacing="23" >
   <tr>
     <th>Album Name</th>
     <th>Description</th>
@@ -11,7 +11,9 @@
   <tr>
     <td><%= album.albumName %></td>
     <td><%= album.description %></td>
-    <td><%= album.user_id %></td>
+    <td><%= link_to album.user_id, "/users/#{album.user_id}"%></td>
+	
+ <td><%= image_tag album.albumAvatar %></td>
     <td><%= link_to 'Show', album %></td>
     <td><%= link_to 'Edit', edit_album_path(album) %></td>
     <td><%= link_to 'Destroy', album, method: :delete, data: { confirm: 'Are you sure?' } %></td>

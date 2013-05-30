@@ -1,7 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user && current_user.isadmin %>
 <center>
+	
+<a href="new_user"> <h1> Add an Admin</h1></a>
+<br>
+
 <a href="users"> <h1> List all users</h1></a>
 <br>
 
-<a href="assets"> <h1> List all pictures</h1></a></center>
+<a href="assets"> <h1> List all pictures</h1></a>
+
+
+<br>
+
+<a href="albums"> <h1> List all albums</h1></a>
+
+</center>
+<% else %>
+<h2>YOU ARE NOT AN ADMIN!</h2>
+<% end %>

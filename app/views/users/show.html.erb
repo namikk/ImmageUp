@@ -1,152 +1,154 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+	<%= notice %>
+</p>
 
 <script>
-  function handleFileSelect(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
+	function handleFileSelect(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		
+	function handleDragOver(evt) {
+		evt.stopPropagation();
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'copy';
+		// Explicitly show this is a copy.
+	}
 
-    var files = evt.dataTransfer.files; // FileList object.
-
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-  }
-
-  function handleDragOver(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-  }
-
-  // Setup the dnd listeners.
-  var dropZone = document.getElementById('asset_asset');
-  dropZone.addEventListener('dragover', handleDragOver, false);
-  dropZone.addEventListener('drop', handleFileSelect, false);
-</script> 
-
-<div class="panel">
-<div class="textbox">
-<p>
-  <strong><h2>Name:
-  <%= @user.name %></h2></strong>
-</p>
-
-<p>
-  <strong><h3>Email:
-  <%= @user.email %></h3></strong>
-</p>
-
-
-<%= image_tag @user.avatar.url, :class => "style_image" %>
-<% if current_user %>
-<% if current_user.name==@user.name || current_user.isadmin %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<% end %>
-<%= link_to 'Back', users_path %> |
-<%= link_to 'Home', root_path %>
-
-</div></div>
-<% if current_user %>
-<% if current_user.name==@user.name || current_user.isadmin %>
-
-<br />
-<div class="panel">
-<center>
-<h1> Create an album </h1>
-<br/>
-<%= form_for(@album, :html => {:multipart => true})  do |f| %>
-  <% if @album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
-
-      <ul>
-      <% @album.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-	<div class="textbox bottom-margin">
-<strong>Album name</strong> 
-	<%= f.text_field :albumName %> <br/>
-<strong>Description</strong> 
-	<%= f.text_field :description %> <br/>
-<strong>Album cover picture</strong> 
-	<%= f.file_field :albumAvatar %> <br/>
-</div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-</center>
-<% end %>
-
-</div>
-
-<center>
-<br/>
-<br/>
-<h1> Upload a picture </h1></center>
-<br />
-
-<%= form_for(@asset, :html => {:multipart => true}) do |f| %>
- <div class="field"><center>
-<div id="uploadContainer" class="file_button_container">
-	<input type="file" id="asset_asset" name="asset[asset]" class="file_button" />
-</div></center>
-  </div>
-  <div class="actions"><center>
-   <input name="commit" type="submit" value=" Upload " id="formsubmit" class="uploadSubmitButton"></center>
-  </div>
-<% end %>
-
-<% end %>
-<% end %>
-
-<script type="text/javascript">    
-	var file= document.getElementById('asset_asset');
-    file.onchange= function() {
-    	
-	var container = document.getElementById('uploadContainer');
-        if (this.value){
-	container.style.opacity='100';
-        }
-        else 
-	container.style.opacity='0.5';
-    };
+	// Setup the dnd listeners.
+	var dropZone = document.getElementById('asset_asset');
+	dropZone.addEventListener('dragover', handleDragOver, false);
+	dropZone.addEventListener('drop', handleFileSelect, false); 
 </script>
 
 <div class="panel">
-<div class="textbox bottom-margin">
-	<h2> All albums</h2>
+	<div class="textbox">
+		<p>
+			<strong><h2>Name:
+			<%= @user.name %></h2></strong>
+		</p>
+
+		<p>
+			<strong><h3>Email:
+			<%= @user.email %></h3></strong>
+		</p>
+
+		<%= image_tag @user.avatar.url, :class => "style_image" %>
+		<% if current_user %>
+		<% if current_user.name==@user.name || current_user.isadmin %>
+		<%= link_to 'Edit', edit_user_path(@user) %> |
+		<% end %>
+		<% end %>
+		<%= link_to 'Back', users_path %> |
+		<%= link_to 'Home', root_path %>
+
+	</div>
+</div>
+<% if current_user %>
+<% if current_user.name==@user.name || current_user.isadmin %>
+
+<br />
+<div class="panel">
+	<center>
+		<h1> Create an album </h1>
+		<br/>
+		<%= form_for(@album, :html => {:multipart => true})  do |f| %>
+		<% if @album.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
+
+			<ul>
+				<% @album.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="textbox bottom-margin">
+			<strong>Album name</strong>
+			<%= f.text_field :albumName %>
+			<br/>
+			<strong>Description</strong>
+			<%= f.text_field :description %>
+			<br/>
+			<strong>Album cover picture</strong>
+			<%= f.file_field :albumAvatar %>
+			<br/>
+		</div>
+
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	</center>
+	<% end %>
+
 </div>
 
 <center>
-<noformat>
-<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
-<tbody><tr>
+	<br/>
+	<br/>
+	<h1> Upload a picture </h1>
+</center>
+<br />
+
+<%= form_for(@asset, :html => {:multipart => true}) do |f| %>
+<div class="field">
+	<center>
+		<div id="uploadContainer" class="file_button_container">
+			<input type="file" id="asset_asset" name="asset[asset]" class="file_button" />
+		</div>
+	</center>
+</div>
+<div class="actions">
+	<center>
+		<input name="commit" type="submit" value=" Upload " id="formsubmit" class="uploadSubmitButton">
+	</center>
+</div>
+<% end %>
+
+<% end %>
+<% end %>
+
+<script type="text/javascript">
+	var file = document.getElementById('asset_asset');
+	file.onchange = function() {
+
+		var container = document.getElementById('uploadContainer');
+		if (this.value) {
+			container.style.opacity = '100';
+		} else
+			container.style.opacity = '0.5';
+	}; 
+</script>
+
+<div class="panel">
+	<div class="textbox bottom-margin">
+		<h2> <%= "#{@user.name}'s albums" %></h2>
+	</div>
+
 <% if @albums.any? %>
-<% @albums.each do |u| %>
+	<center>
+		<noformat>
+			<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
+				<tbody>
+					<tr>
+						<% @albums.each do |u| %>
 
-<% @counter=@counter+1 %>
+						<% @counter=@counter+1 %>
 
-<th> <div align="center" class="image" style="width: 222px;">
-<%= link_to image_tag(u.albumAvatar, :class => "style_image"),u	 %>
-<br>
-<span class="caption"><%= u.albumName %></span></div> </th>
-<% if @counter % 4 ==0 %>
-<tr></tr>
-<% end %>
-<% end %>
+						<th>
+						<div align="center" class="image" style="width: 222px;height:170px;">
+							<%= link_to image_tag(u.albumAvatar, :class => "style_image"),u	 %>
+							<br>
+							<span class="caption"><%= u.albumName %></span>
+						</div></th>
+						<% if @counter % 3 ==0 %>
+					<tr></tr>
+					<% end %>
+					<% end %>
 
-<% end %>
+					<% end %>
 					</tr>
 				</tbody>
 			</table>
@@ -154,37 +156,37 @@
 	</center>
 </div>
 
-
 <br />
 <div class="panel">
-<div class="textbox bottom-margin">
-	<h2> All pictures</h2>
-</div>
+	<div class="textbox bottom-margin">
+		<h2> <%= "#{@user.name}'s pictures" %></h2>
+	</div>
+	<center>
+		<noformat>
+			<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
+				<tbody>
+					<tr>
+						<% if @user.assets.any? %>
+						<% @counter=0%>
+						<% @user.assets.each do |u| %>
 
+						<% @counter=@counter+1 %>
 
- 
-<center>
-<noformat>
-<table border="1" bordercolor="993300" cellspacing="2" cellpadding="2">
-<tbody><tr>
-<% if @user.assets.any? %>
-<% @user.assets.each do |u| %>
+						<th>
+						<div align="center" class="image" style="width: 222px;height:170px;">
+							<%= link_to image_tag(u.asset.url, :class => "style_image"),u %>
+							<br>
+							<span class="caption"><%= u.asset_file_name %></span>
+						</div></th>
+						<% if @counter % 5 ==0 %>
+					<tr></tr>
+					<% end %>
+					<% end %>
 
-<% @counter=@counter+1 %>
-
-<th> <div align="center" class="image" style="width: 222px;">
-<%= link_to image_tag(u.asset.url, :class => "style_image"),u.asset.url %>
-<br>
-<span class="caption"><%= u.asset.original_filename %></span></div> </th>
-<% if @counter % 3 ==0 %>
-<tr></tr>
-<% end %>
-<% end %>
-
-<% end %>					</tr>
+					<% end %>					</tr>
 				</tbody>
 			</table>
 		</noformat>
 	</center>
-	
+
 </div>

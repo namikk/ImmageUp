@@ -5,9 +5,6 @@ class AuthenticationController < ApplicationController
   def forgot_password
   end
 
-  def new_user
-  end
-
   def password_sent
   end
 #m ethod "sign_in" is called from the route that handles the HTTP "get" command:

@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-
+<h3> Created by </h3> 
+	<p><%= link_to @user.name ,@user %>
+</p>
 <p>
   <b>Album Name</b>
   <%= @album.albumName %>
@@ -11,6 +13,7 @@
   <%= @album.description %>
 </p>
 
+	
 <%= link_to 'Edit', edit_album_path(@album) %> |
 <%= link_to 'Back', current_user %>
 

@@ -5,5 +5,5 @@ class Album < ActiveRecord::Base
   
   validates_uniqueness_of :albumName, :scope => [:user_id]
   
-  has_attached_file :albumAvatar,:dependent => :destroy, :default_url => '/defaultProfile.png'
+  has_attached_file :albumAvatar,:dependent => :destroy, :default_url => '/defaultAlbumProfile.png'
 end
