@@ -46,6 +46,9 @@
 						</center>
 					</div>
 				</form>
+				<% if @current_user.albums.any? %>
+				<%= link_to "Active Album is:#{ @activeAlbum.albumName }", @activeAlbum %>
+				<% end %>
 				<%= link_to "Show My Profile", @user %>
 			</div>
 			<script type="text/javascript">

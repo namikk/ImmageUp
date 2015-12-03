@@ -44,7 +44,7 @@ class AssetsController < ApplicationController
 	if current_user
     @asset = current_user.assets.build(params[:asset])
     
-    @asset.album=activeAlbum
+    @asset.album=Album.find_by_id(activeAlbumId)
 	end
     respond_to do |format|
       if @asset.save

@@ -2,10 +2,12 @@ class HomeController < ApplicationController
     def index
 	@counter = 0
 	@assets = Asset.all
+	
   
  if current_user
       @user = @current_user
       @assets = @user.assets
+      @activeAlbum=activeAlbum
     end
 
   

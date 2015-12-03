@@ -17,9 +17,9 @@
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= user.password_hash %></td><td>
-<%= image_tag user.avatar.url, :class => "style_image" %></td>
+	<%= image_tag user.avatar.url, :class => "style_image" %></td>
     <td><%= link_to 'Show', user %></td>
-    <% if user=@current_user || @current_user.isadmin %>
+    <% if @user=@current_user || @current_user.isadmin %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>

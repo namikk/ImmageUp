@@ -6,7 +6,7 @@ class Asset < ActiveRecord::Base
   
   validates_attachment_presence :asset  
   validates_attachment_content_type :asset, 
-  :content_type => /^image\/(png|gif|jpeg|jpg)/
+  :content_type => /^image\/(png|gif|jpeg|jpg|bmp)/
   
    
 end

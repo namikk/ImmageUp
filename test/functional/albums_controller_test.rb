@@ -16,19 +16,6 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create album" do
-    assert_difference('Album.count') do
-      post :create, album: {  }
-    end
-
-    assert_redirected_to album_path(assigns(:album))
-  end
-
-  test "should show album" do
-    get :show, id: @album
-    assert_response :success
-  end
-
   test "should get edit" do
     get :edit, id: @album
     assert_response :success

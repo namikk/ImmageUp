@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 	@counter = 0
   @assets = @user.assets
   @albums = @user.albums
-  
   if current_user
 	@asset= @current_user.assets.build
 	@album= @current_user.albums.build

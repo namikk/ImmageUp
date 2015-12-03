@@ -5,11 +5,11 @@ one:
   asset_content_type: MyString
   asset_file_size: 1
   asset_updated_at: 2013-05-05 18:10:52
-  post_id: 1
+  user_id: 1
 
 two:
   asset_file_name: MyString
   asset_content_type: MyString
   asset_file_size: 1
   asset_updated_at: 2013-05-05 18:10:52
-  post_id: 1
+  user_id: 1

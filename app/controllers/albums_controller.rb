@@ -17,6 +17,9 @@ class AlbumsController < ApplicationController
     @counter=0
     @album = Album.find(params[:id])
     @user = User.find(@album.user_id)
+    if session[:album_id]=params[:id]
+    flash= 'This album was set as active. Viewing an album sets it as active!'
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @album }

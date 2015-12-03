@@ -22,6 +22,12 @@ def login
 
 	if user
 	session[:user_id] = user.id
+	if user.albums.any?
+	user.albums.each do |a|
+  session[:album_id] = a.id
+  end
+  end
+	
 	flash[:notice] = 'Welcome.'
 	redirect_to :root
 	else
@@ -30,6 +36,7 @@ def login
 	end
 
 end
+
 def signed_out
   session[:user_id] = nil
   flash[:notice] = "You have been signed out."

@@ -11,10 +11,6 @@ class AuthenticationControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get new_user" do
-    get :new_user
-    assert_response :success
-  end
 
   test "should get password_sent" do
     get :password_sent
